@@ -1,0 +1,69 @@
+﻿Imports Microsoft.Win32
+
+Public Class Form1
+    Dim rk As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run\", True) 'Khóa dành cho khởi động cùng Windows
+    Dim path As String = Process.GetCurrentProcess.MainModule.FileName 'Tên (name) của ứng dụng đang chạy
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        WebBrowser1.Navigate("https://www.hungcoder.com")
+        If rk.GetValue("My App") = "" Then 'My App là tên khóa trong Registry, kiểm tra nếu tồn tại khóa này rồi thì
+            chkStartUp.Checked = False 'Không check
+        Else
+            chkStartUp.Checked = True 'Check
+        End If
+    End Sub
+
+    Private Sub chkStartUp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkStartUp.CheckedChanged
+        If Me.WindowState = FormWindowState.Minimized Then
+            NotifyIcon1.Visible = True
+            Me.Visible = False
+        End If
+
+        If chkStartUp.Checked = True Then
+            rk.SetValue("My App", path) 'Ghi vào Registry
+            ToolStripStatusLabel1.Text = "Bản Đã Mỡ Khởi Động Cùng Windows"
+        Else
+            rk.DeleteValue("My App", False) 'Xóa khóa trong Registry
+            ToolStripStatusLabel1.Text = "Bản Đã Tắt Khởi Động Cùng Windows"
+        End If
+    End Sub
+
+  
+    Private Sub NotifyIcon1_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            Me.Visible = True
+            If Me.WindowState = FormWindowState.Minimized Then
+                Me.WindowState = FormWindowState.Normal
+            End If
+            NotifyIcon1.Visible = False
+        End If
+
+    End Sub
+End Class
+
+
+https://wwwhuyny.blogspot.com/
+https://tieubaoblog.blogspot.com/
+https://hphuc216.blogspot.com/
+http://www.khactu.com/
+https://www.startinhit.net/
+https://adminducxamlone.blogspot.com/
+http://www.namhacker12345.blogspot.com/
+https://www.howktech.com/
+https://leminhut.blogspot.com/
+https://www.theloi.xyz/
+https://goo.gl/RuYy6X
+https://www.anhbia247.com/
+https://www.ducduytl.tk/
+https://hungstar-it.blogspot.com/
+https://starsinh.blogspot.com/
+https://www.chiasetemplate.blog/
+https://www.lobatquai.xyz/
+https://www.thanhhapblog.tk/
+https://lebalongit.blogspot.com/
+https://www.starquoc-it.club/
+http://www.duyphuong.tk/
+https://www.nguyenduyblog.com/
+http://www.fspade.blog/
+https://www.nguyenphu.xyz/
+http://www.quocbaoblog.ooo/
